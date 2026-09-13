@@ -1,63 +1,98 @@
-# active-directory-home-lab
-Windows Server Active Directory home lab documenting virtualization, networking, domain services, administration, and security.
-
 # Active Directory Home Lab
+
+A virtualized Windows enterprise environment built to practice system administration, networking, identity management, and security.
 
 ## Project Overview
 
-This project documents the creation of a virtualized Windows Server environment used to learn and practice enterprise IT administration.
+This project documents the design and deployment of an isolated Active Directory home lab using Hyper-V.
 
-The lab will be used to configure Active Directory Domain Services (AD DS), Domain Name System (DNS), user and group management, Group Policy, Windows client domain membership, networking, and security.
+The environment currently includes a Windows Server 2025 Domain Controller and a Windows 11 Pro client. The lab will be expanded to demonstrate user and group administration, Organizational Units, Group Policy, security controls, and troubleshooting.
 
-## Current Lab Environment
+## Lab Environment
 
 ### Host Computer
+
 - Windows 11 Pro
 - Hyper-V virtualization
 - AMD Ryzen 9 7950X
 - 32 GB RAM
 
 ### Virtual Network
+
 - Hyper-V internal virtual switch
 - Switch name: `AD-Lab`
+- Network: `10.10.10.0/24`
 - Isolated from the physical home network
 
-### Domain Controller
-- Virtual machine: `AZATHOTH-DC01`
-- Windows Server 2025 Standard Evaluation
-- Desktop Experience
-- Generation 2 Hyper-V VM
+## Virtual Machines
+
+| Device | Operating System | Role | IP Address | DNS Server |
+|---|---|---|---|---|
+| `AZATHOTH-DC01` | Windows Server 2025 Standard Evaluation | Domain Controller and DNS server | `10.10.10.10` | `10.10.10.10` |
+| `NYARL-PC01` | Windows 11 Pro | Domain client | `10.10.10.20` | `10.10.10.10` |
+
+### Domain Controller Configuration
+
+- Computer name: `AZATHOTH-DC01`
+- Domain: `azathoth.lab`
+- Active Directory Domain Services (AD DS)
+- Domain Name System (DNS)
+- Generation 2 Hyper-V virtual machine
 - 2 virtual processors
 - 4 GB startup memory
-- 80 GB dynamically expanding VHDX
+- 80 GB dynamically expanding virtual hard disk
 - Secure Boot enabled
 
-## Current Project Status
+### Windows Client Configuration
 
-Completed:
+- Computer name: `NYARL-PC01`
+- Windows 11 Pro
+- Static IPv4 address: `10.10.10.20/24`
+- Preferred DNS server: `10.10.10.10`
+- Domain membership: Not joined yet
+
+## Completed Work
+
 - Enabled Hyper-V
-- Created isolated `AD-Lab` virtual network
-- Created Windows Server virtual machine
+- Created the isolated `AD-Lab` virtual network
+- Created and configured the Windows Server virtual machine
 - Installed Windows Server 2025
-- Renamed server to `AZATHOTH-DC01`
-- Verified successful reboot after rename
-- Configured local time zone
+- Renamed the server to `AZATHOTH-DC01`
+- Assigned the server static IP address `10.10.10.10`
+- Installed Active Directory Domain Services
+- Promoted `AZATHOTH-DC01` to a Domain Controller
+- Created the `azathoth.lab` domain
+- Installed and configured Domain Name System
+- Created the Windows 11 Pro client virtual machine
+- Renamed the client to `NYARL-PC01`
+- Assigned the client static IP address `10.10.10.20/24`
+- Configured the client to use `10.10.10.10` for DNS
+- Verified network connectivity between the client and Domain Controller
+- Verified DNS resolution for `azathoth.lab`
 
-Next:
-- Configure static IP addressing
-- Install Active Directory Domain Services (AD DS)
-- Promote `AZATHOTH-DC01` to a domain controller
-- Configure Domain Name System (DNS)
-- Create organizational units, users, and groups
-- Add a Windows client VM to the domain
-- Configure Group Policy
+## Next Steps
+
+- Join `NYARL-PC01` to the `azathoth.lab` domain
+- Create Organizational Units (OUs)
+- Create domain users and security groups
+- Configure Group Policy Objects (GPOs)
+- Test domain sign-in from the Windows client
+- Add security policies and administrative controls
+- Document validation tests and troubleshooting
+- Add network diagrams and screenshots
 
 ## Skills Demonstrated
 
 - Hyper-V virtualization
 - Virtual machine provisioning
-- Virtual networking
+- TCP/IP network configuration
+- Static IPv4 addressing
+- Active Directory Domain Services
+- Domain Name System
 - Windows Server administration
-- Server naming and configuration
+- Windows client configuration
+- Network connectivity testing
+- DNS troubleshooting
 - Infrastructure planning
 - Technical documentation
+- Git and GitHub version control
