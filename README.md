@@ -49,7 +49,7 @@ The environment currently includes a Windows Server 2025 Domain Controller and a
 - Windows 11 Pro
 - Static IPv4 address: `10.10.10.20/24`
 - Preferred DNS server: `10.10.10.10`
-- Domain membership: Not joined yet
+- Domain membership: Joined to `azathoth.lab`
 
 ## Completed Work
 
@@ -69,11 +69,14 @@ The environment currently includes a Windows Server 2025 Domain Controller and a
 - Configured the client to use `10.10.10.10` for DNS
 - Verified network connectivity between the client and Domain Controller
 - Verified DNS resolution for `azathoth.lab`
+- Joined `NYARL-PC01` to the `azathoth.lab` domain
+- Verified domain membership after restarting the client
+- Created the `AZATHOTH-LAB` Organizational Unit (OU)
+- Created `Users` and `Workstations` child OUs
+- Moved the `NYARL-PC01` computer account into the `Workstations` OU
 
 ## Next Steps
 
-- Join `NYARL-PC01` to the `azathoth.lab` domain
-- Create Organizational Units (OUs)
 - Create domain users and security groups
 - Configure Group Policy Objects (GPOs)
 - Test domain sign-in from the Windows client
