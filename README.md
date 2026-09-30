@@ -74,15 +74,21 @@ The environment currently includes a Windows Server 2025 Domain Controller and a
 - Created the `AZATHOTH-LAB` Organizational Unit (OU)
 - Created `Users` and `Workstations` child OUs
 - Moved the `NYARL-PC01` computer account into the `Workstations` OU
+- Created a dedicated `Groups` Organizational Unit (OU) under `AZATHOTH-LAB`
+- Organized `John Doe`, `IT-Staff`, and `NYARL-PC01` into their appropriate OUs
+- Removed obsolete empty OUs after verifying their contents
+- Successfully signed in to `NYARL-PC01` with the domain account `jdoe`
+- Verified the signed-in domain identity using `whoami`
+- Verified active membership in the `IT-Staff` security group
 
 ## Next Steps
 
-- Create domain users and security groups
+- Create additional domain users and departmental security groups
 - Configure Group Policy Objects (GPOs)
-- Test domain sign-in from the Windows client
+- Test GPO application on `NYARL-PC01`
 - Add security policies and administrative controls
 - Document validation tests and troubleshooting
-- Add network diagrams and screenshots
+- Add network and OU structure diagrams and screenshots
 
 ## Skills Demonstrated
 
