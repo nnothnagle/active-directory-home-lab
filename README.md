@@ -105,3 +105,14 @@ The environment currently includes a Windows Server 2025 Domain Controller and a
 - Infrastructure planning
 - Technical documentation
 - Git and GitHub version control
+
+## Group Policy Configuration and Validation
+
+Created and tested a Group Policy Object (GPO) to restrict standard domain users from accessing Control Panel and Windows Settings.
+
+- GPO name: `Restrict Control Panel - Users`
+- Linked to the `AZATHOTH-LAB/Users` Organizational Unit (OU)
+- Enabled `Prohibit access to Control Panel and PC settings`
+- Refreshed policies on `NYARL-PC01` with `gpupdate /force`
+- Verified the applied policy with `gpresult /r /scope:user`
+- Confirmed that Control Panel access was blocked for domain user `AZATHOTH\jdoe`
