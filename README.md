@@ -51,6 +51,38 @@ The environment currently includes a Windows Server 2025 Domain Controller and a
 - Preferred DNS server: `10.10.10.10`
 - Domain membership: Joined to `azathoth.lab`
 
+## Directory Services and Access Control
+
+### Users and Security Groups
+
+| User | Username | Security Group | Purpose |
+|---|---|---|---|
+| John Doe | `jdoe` | `IT-Staff` | Authorized IT user |
+| Alice Smith | `asmith` | `HR-Staff` | Unauthorized comparison user for IT resource testing |
+
+### Group Policy
+
+- Created the `Restrict Control Panel - Users` Group Policy Object (GPO)
+- Linked the GPO to the `Users` Organizational Unit (OU)
+- Updated Group Policy on `NYARL-PC01`
+- Verified that the Control Panel restriction applied to `jdoe`
+- Confirmed the applied GPO with `gpresult`
+
+### Secure File Share
+
+- Created the folder `C:\Shares\IT-Share` on `AZATHOTH-DC01`
+- Published it as `\\AZATHOTH-DC01\IT-Share`
+- Granted `IT-Staff` Change share permission
+- Granted `Domain Admins` Full share permission
+- Granted `IT-Staff` Modify NTFS permission
+- Limited the parent `C:\Shares` folder to `Administrators` and `SYSTEM`
+- Verified that `jdoe` could open the share and create, modify, and delete a test file
+- Verified that `asmith`, a member of `HR-Staff`, was denied access
+
+### File-Share Troubleshooting
+
+The parent folder `C:\Shares` was initially shared instead of the intended child folder `C:\Shares\IT-Share`. Connectivity to SMB port 445 was verified with `Test-NetConnection`, available shares were inspected with `net view`, and the incorrect share path was identified with `Get-SmbShare`. The parent share was removed and the intended `IT-Share` was then published with the correct permissions.
+
 ## Completed Work
 
 - Enabled Hyper-V
@@ -80,6 +112,16 @@ The environment currently includes a Windows Server 2025 Domain Controller and a
 - Successfully signed in to `NYARL-PC01` with the domain account `jdoe`
 - Verified the signed-in domain identity using `whoami`
 - Verified active membership in the `IT-Staff` security group
+- Created the `HR-Staff` global security group
+- Created the `asmith` domain user for Alice Smith
+- Added Alice Smith to the `HR-Staff` security group
+- Created and linked the `Restrict Control Panel - Users` Group Policy Object (GPO)
+- Verified the user policy on `NYARL-PC01` with `gpresult`
+- Created and secured the `IT-Share` Server Message Block (SMB) file share
+- Configured share and NTFS permissions using domain security groups
+- Verified authorized create, modify, and delete access for `jdoe`
+- Verified access denial for unauthorized user `asmith`
+- Diagnosed and corrected an incorrect parent-folder share configuration
 
 ## Next Steps
 
