@@ -123,14 +123,41 @@ The parent folder `C:\Shares` was initially shared instead of the intended child
 - Verified access denial for unauthorized user `asmith`
 - Diagnosed and corrected an incorrect parent-folder share configuration
 
+## Departmental File Shares and Mapped Drives
+
+A second departmental file share was created to demonstrate role-based access control and centralized drive deployment.
+
+### HR Department Share
+
+- Created `C:\Shares\HR-Share` on `AZATHOTH-DC01`
+- Shared the folder as `\\AZATHOTH-DC01\HR-Share`
+- Granted the `HR-Staff` security group Modify access
+- Granted `Domain Admins` Full Control
+- Removed general `Everyone` access
+- Verified that Alice Smith (`asmith`) could create, edit, and delete files
+- Verified that John Doe (`jdoe`) was denied access
+
+### Departmental Drive Mapping
+
+Created and linked the `Map Department Drives` Group Policy Object (GPO) to the `AZATHOTH-LAB\Users` Organizational Unit (OU).
+
+Group Policy Preferences were configured with item-level targeting:
+
+- `IT Department (I:)` maps to `\\AZATHOTH-DC01\IT-Share` for members of `IT-Staff`
+- `HR Department (H:)` maps to `\\AZATHOTH-DC01\HR-Share` for members of `HR-Staff`
+
+Validation confirmed:
+
+- John Doe received only the `I:` drive
+- Alice Smith received only the `H:` drive
+- Unauthorized departmental drives were not displayed
+
 ## Next Steps
 
-- Create additional domain users and departmental security groups
-- Configure Group Policy Objects (GPOs)
-- Test GPO application on `NYARL-PC01`
-- Add security policies and administrative controls
-- Document validation tests and troubleshooting
-- Add network and OU structure diagrams and screenshots
+- Configure additional security policies and administrative controls
+- Automate Active Directory user creation with PowerShell
+- Add network and Organizational Unit (OU) diagrams and screenshots
+- Perform final validation and project review
 
 ## Skills Demonstrated
 
