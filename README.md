@@ -152,6 +152,25 @@ Validation confirmed:
 - Alice Smith received only the `H:` drive
 - Unauthorized departmental drives were not displayed
 
+## Security Hardening and Administrative Controls
+
+Additional domain and workstation security controls were configured and validated.
+
+### Domain Account Lockout Policy
+
+The Default Domain Policy was configured with the following account-lockout settings:
+
+- Account lockout threshold: 5 invalid sign-in attempts
+- Account lockout duration: 15 minutes
+- Failed-attempt counter reset: 15 minutes
+- Administrator account lockout: Enabled
+
+The effective settings were verified with:
+
+```powershell
+Get-ADDefaultDomainPasswordPolicy |
+    Select-Object LockoutThreshold, LockoutDuration, LockoutObservationWindow
+
 ## Next Steps
 
 - Configure additional security policies and administrative controls
