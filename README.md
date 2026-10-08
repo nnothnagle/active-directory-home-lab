@@ -206,10 +206,35 @@ The effective settings were verified with:
 Get-ADDefaultDomainPasswordPolicy |
     Select-Object LockoutThreshold, LockoutDuration, LockoutObservationWindow
 
-## Next Steps
+## Validation Evidence
 
-- Add selected configuration and validation screenshots
-- Perform final validation and project review
+### Domain Controller and Directory Services
+
+![DNS diagnostic showing passed tests](screenshots/01-dns-diagnostic-passed.png)
+
+![Active Directory user accounts](screenshots/02-active-directory-users.png)
+
+![Active Directory security groups](screenshots/03-active-directory-groups.png)
+
+### Group Policy
+
+![Configured Group Policy Objects](screenshots/04-group-policy-objects.png)
+
+![Applied user Group Policy results](screenshots/06-user-group-policy-results.png)
+
+### Client Connectivity and Access Control
+
+![Client domain identity and DNS resolution](screenshots/05-client-domain-dns-validation.png)
+
+![IT department drive mapped for John Doe](screenshots/08-it-drive-mapping.png)
+
+![HR department drive mapped for Alice Smith](screenshots/10-hr-drive-mapping.png)
+
+![Unauthorized IT share access denied for HR user](screenshots/12-hr-user-it-share-denied.png)
+
+## Project Status
+
+The core lab build, security configuration, PowerShell automation, access-control testing, and final validation are complete.
 
 ## PowerShell User Automation
 
