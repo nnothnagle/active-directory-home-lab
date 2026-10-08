@@ -173,10 +173,35 @@ Get-ADDefaultDomainPasswordPolicy |
 
 ## Next Steps
 
-- Configure additional security policies and administrative controls
-- Automate Active Directory user creation with PowerShell
 - Add network and Organizational Unit (OU) diagrams and screenshots
 - Perform final validation and project review
+
+## PowerShell User Automation
+
+Created and tested a PowerShell workflow that imports user information from a CSV (Comma-Separated Values) file and automatically provisions Active Directory accounts.
+
+The automation:
+
+- Imports first name, last name, username, department, and group information from a CSV file
+- Creates enabled user accounts in the `Users` Organizational Unit (OU)
+- Assigns each account to its correct departmental security group
+- Requires users to change their temporary password at first sign-in
+- Prompts for the password securely instead of storing it in the script or repository
+- Verifies that the requested security group exists before creating the account
+- Detects existing usernames and skips them to prevent duplicate accounts
+- Displays clear success, warning, and error messages
+
+Validation completed:
+
+- Created `mreed` with the IT department and `IT-Staff` membership
+- Created `ecarter` with the HR department and `HR-Staff` membership
+- Confirmed both accounts were enabled and placed in the correct Organizational Unit
+- Reran the script and confirmed both duplicate accounts were safely skipped
+
+Automation files:
+
+- [Create-ADUsers.ps1](automation/Create-ADUsers.ps1)
+- [NewUsers.csv](automation/NewUsers.csv)
 
 ## Skills Demonstrated
 
@@ -193,6 +218,9 @@ Get-ADDefaultDomainPasswordPolicy |
 - Infrastructure planning
 - Technical documentation
 - Git and GitHub version control
+- PowerShell automation
+- CSV-driven Active Directory account provisioning
+- Input validation and duplicate-account prevention
 
 ## Group Policy Configuration and Validation
 
