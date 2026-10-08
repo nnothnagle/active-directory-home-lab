@@ -205,6 +205,7 @@ The effective settings were verified with:
 ```powershell
 Get-ADDefaultDomainPasswordPolicy |
     Select-Object LockoutThreshold, LockoutDuration, LockoutObservationWindow
+```
 
 ## Validation Evidence
 
