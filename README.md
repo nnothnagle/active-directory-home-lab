@@ -24,6 +24,23 @@ The environment currently includes a Windows Server 2025 Domain Controller and a
 - Network: `10.10.10.0/24`
 - Isolated from the physical home network
 
+### Network Topology
+
+```mermaid
+flowchart TD
+    Host["Windows 11 Pro host<br/>Hyper-V"]
+    Switch["AD-Lab internal virtual switch"]
+    DC["AZATHOTH-DC01<br/>Windows Server 2025<br/>10.10.10.10<br/>Domain controller and DNS"]
+    Client["NYARL-PC01<br/>Windows 11 Pro<br/>10.10.10.20<br/>Domain member"]
+
+    Host --> Switch
+    Switch --> DC
+    Switch --> Client
+    Client -->|"DNS and domain authentication"| DC
+```
+
+The internal Hyper-V switch isolates the lab from the physical home network. NYARL-PC01 uses AZATHOTH-DC01 for Domain Name System (DNS) resolution and domain authentication.
+
 ## Virtual Machines
 
 | Device | Operating System | Role | IP Address | DNS Server |
@@ -52,6 +69,24 @@ The environment currently includes a Windows Server 2025 Domain Controller and a
 - Domain membership: Joined to `azathoth.lab`
 
 ## Directory Services and Access Control
+
+### Organizational Unit Structure
+
+```mermaid
+flowchart TD
+    Domain["azathoth.lab domain"]
+    Lab["AZATHOTH-LAB"]
+    Users["Users OU<br/>jdoe · asmith · mreed · ecarter"]
+    Groups["Groups OU<br/>IT-Staff · HR-Staff"]
+    Workstations["Workstations OU<br/>NYARL-PC01"]
+
+    Domain --> Lab
+    Lab --> Users
+    Lab --> Groups
+    Lab --> Workstations
+```
+
+The Organizational Unit (OU) structure separates user accounts, security groups, and domain-joined workstations for easier administration and Group Policy targeting.
 
 ### Users and Security Groups
 
@@ -173,7 +208,7 @@ Get-ADDefaultDomainPasswordPolicy |
 
 ## Next Steps
 
-- Add network and Organizational Unit (OU) diagrams and screenshots
+- Add selected configuration and validation screenshots
 - Perform final validation and project review
 
 ## PowerShell User Automation
